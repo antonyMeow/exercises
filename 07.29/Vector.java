@@ -9,12 +9,12 @@ public class Vector
   
   public Vector (double x) 
   { 
-    this(x, 0, 0);
+    this(x, 1, 1);
   }
 
   public Vector (double x, double y) 
   { 
-    this(x, y, 0);
+    this(x, y, 1);
   }
 
   public Vector (double x, double y, double z)
