@@ -1,23 +1,23 @@
-package src;
+package src.Vector;
 
-public class Vector
+public class MyVector
 {
   private final double _x;
   private final double _y;
   private final double _z;
   private final double _length;
   
-  public Vector (double x) 
+  public MyVector (double x) 
   { 
     this(x, 1, 1);
   }
 
-  public Vector (double x, double y) 
+  public MyVector (double x, double y) 
   { 
     this(x, y, 1);
   }
 
-  public Vector (double x, double y, double z)
+  public MyVector (double x, double y, double z)
   {
       this._x = x;
       this._y = y;
@@ -27,10 +27,10 @@ public class Vector
   }
 
   private double countLength () { 
-    return (double) Math.sqrt(_x * _x + _y * _y + _z * _z);
+    return Math.sqrt(_x * _x + _y * _y + _z * _z);
   }
 
-  public double scalarMultiply (Vector another) 
+  public double scalarMultiply (MyVector another) 
   {
     double newX = this._x * another.getX();
     double newY = this._y * another.getY();
@@ -44,23 +44,23 @@ public class Vector
     return this.scalarMultiply(this);
   }
 
-  public Vector vectorMultiply (Vector another) 
+  public MyVector vectorMultiply (MyVector another) 
   {
-    double newX = this._y * another.getZ() - another.getZ() * this._y;
-    double newY = this._z * another.getX() - another.getX() * this._z;
-    double newZ = this._x * another.getY() - another.getY() * this._x;
+    double newX = this._y * another.getZ() - this._z * another.getY();
+    double newY = this._z * another.getX() - this._x * another.getZ();
+    double newZ = this._x * another.getY() - this._y * another.getX();
 
-    return new Vector (newX, newY, newZ);
+    return new MyVector (newX, newY, newZ);
   }
 
-  public double mixMultiply (Vector second, Vector third) 
+  public double mixMultiply (MyVector second, MyVector third) 
   {
-    Vector vectorMultiplication = second.vectorMultiply(third);
+    MyVector vectorMultiplication = second.vectorMultiply(third);
 
     return this.scalarMultiply(vectorMultiplication);
   } 
 
-  public double cos (Vector another)
+  public double cos (MyVector another)
   {
     double scalarMultiplication = this.scalarMultiply(another);
     double lengthMultiplication = this._length * another.getLength();
@@ -68,34 +68,34 @@ public class Vector
     return scalarMultiplication / lengthMultiplication;
   }
 
-  public Vector add (Vector another) 
+  public MyVector add (MyVector another) 
   {
     double newX = this._x + another.getX();
     double newY = this._y + another.getY();
     double newZ = this._z + another.getZ();
 
-    return new Vector(newX, newY, newZ);
+    return new MyVector(newX, newY, newZ);
   }
 
-  public Vector addNumber (double n) 
+  public MyVector multiplyNum (double n)
   {
     double newX = this._x * n;
     double newY = this._y * n;
     double newZ = this._z * n;
     
-    return new Vector (newX, newY, newZ);
+    return new MyVector (newX, newY, newZ);
   }
 
-  public Vector subtract (Vector another)
+  public MyVector subtract (MyVector another)
   {
     double newX = this._x - another.getX();
     double newY = this._y - another.getY();
     double newZ = this._z - another.getZ();
 
-    return new Vector(newX, newY, newZ);
+    return new MyVector(newX, newY, newZ);
   }
 
-  public double sumModulus (Vector another)
+  public double sumModulus (MyVector another)
   {
     double a = this.scalarSquare();
     double b = another.scalarSquare();
@@ -104,7 +104,7 @@ public class Vector
     return a + b + c;
   }
 
-  public double subtractModulus (Vector another)
+  public double subtractModulus (MyVector another)
   {
     double a = this.scalarSquare();
     double b = another.scalarSquare();
