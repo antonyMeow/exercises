@@ -1,9 +1,13 @@
 package src.ResponseToFile;
 
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class Response 
 {
