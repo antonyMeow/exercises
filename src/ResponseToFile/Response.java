@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -17,18 +16,17 @@ public class Response
     try 
     {
       PrintWriter printWriter = new PrintWriter(outputFile);
-      URLConnection urlConnection = url.openConnection();
-      HttpURLConnection  httpUrlConnection = (HttpURLConnection) urlConnection;
+      HttpURLConnection  httpUrlConnection = (HttpURLConnection) url.openConnection();
 
       String requestMethod = httpUrlConnection.getRequestMethod();
       printWriter.println("Request method: " + requestMethod + "\n");
 
-      Map<String,List<String>> headers = urlConnection.getHeaderFields();
       printWriter.println("Response headers:");
-      for (Map.Entry<String, List<String>> entry : headers.entrySet()) 
+      Map<String,List<String>> responseHeaders = httpUrlConnection.getHeaderFields();
+      for (Map.Entry<String, List<String>> entry : responseHeaders.entrySet())
         printWriter.println("\t" + entry.getKey() + ": " + entry.getValue());
 
-      InputStream inputStream = urlConnection.getInputStream();
+      InputStream inputStream = httpUrlConnection.getInputStream();
       byte[] byteBuffer = new byte[inputStream.available()];
 
       if (inputStream.read(byteBuffer) != -1)
