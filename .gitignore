@@ -1,4 +1,4 @@
 .idea/
 out/
 exercises.iml
-src/ResponseToFile/output.txt
+src/java/ResponseToFile/output.txt

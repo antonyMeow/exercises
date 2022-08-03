@@ -1,4 +1,4 @@
-package java.Vector;
+package src.java.Vector;
 
 public class Main 
 {

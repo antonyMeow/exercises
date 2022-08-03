@@ -1,4 +1,4 @@
-package java.ResponseToFile;
+package src.java.ResponseToFile;
 
 import java.io.File;
 import java.io.InputStream;
