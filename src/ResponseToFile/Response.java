@@ -3,6 +3,7 @@ package src.ResponseToFile;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -17,11 +18,15 @@ public class Response
     {
       PrintWriter printWriter = new PrintWriter(outputFile);
       URLConnection urlConnection = url.openConnection();
+      HttpURLConnection  httpUrlConnection = (HttpURLConnection) urlConnection;
+
+      String requestMethod = httpUrlConnection.getRequestMethod();
+      printWriter.println("Request method: " + requestMethod + "\n");
 
       Map<String,List<String>> headers = urlConnection.getHeaderFields();
-      printWriter.println("headers:");
+      printWriter.println("Response headers:");
       for (Map.Entry<String, List<String>> entry : headers.entrySet()) 
-        printWriter.println(entry.getKey() + ": " + entry.getValue());
+        printWriter.println("\t" + entry.getKey() + ": " + entry.getValue());
 
       InputStream inputStream = urlConnection.getInputStream();
       byte[] byteBuffer = new byte[inputStream.available()];
@@ -30,7 +35,7 @@ public class Response
       {
         char[] charBuffer = new String(byteBuffer, StandardCharsets.UTF_8).toCharArray();
         String content = new String(charBuffer);
-        printWriter.println("\ncontent:\n" + content);
+        printWriter.println("\nContent:\n" + content);
       }
       printWriter.close();
     }
