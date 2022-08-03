@@ -1,6 +1,7 @@
-package src.ResponseToFile;
+package java.ResponseToFile;
 
-import static src.ResponseToFile.Response.writeResponseToFile;
+import static java.ResponseToFile.Response.writeResponseToFile;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
