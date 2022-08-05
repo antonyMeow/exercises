@@ -13,6 +13,7 @@ function selectionSort (arr) {
     sorted.push(unsorted[max]);
     unsorted = deleteItem(unsorted, max);
   }
+  
   return sorted;
 }
 
@@ -26,6 +27,7 @@ function findMax (arr) {
       maxIndex = i;
     }
   }
+
   return maxIndex;
 }
 
@@ -34,6 +36,7 @@ function copy (arrFrom) {
 
   for (let i = 0; i < arrFrom.length; i++) 
     newArr[i] = arrFrom[i];
+
   return newArr;
 }
 
@@ -43,5 +46,6 @@ function deleteItem (arr, index) {
   for (let i = 0; i < arr.length; i++) {
     if (i != index) newArr.push(arr[i]);
   }
+
   return newArr;
 }
