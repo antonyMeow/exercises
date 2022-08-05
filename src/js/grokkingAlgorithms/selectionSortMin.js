@@ -7,22 +7,26 @@ function selectionSort (arr) {
   let unsortedArr = [...arr];
   let sortedArr = [];
   let smallest;
+  
   for (let i = 0; i < arr.length; i++) {
     smallest = findSmallest(unsortedArr);
     sortedArr.push(unsortedArr[smallest]);
     unsortedArr = unsortedArr.filter((value, index) => index != smallest);
   }
+
   return sortedArr;
 }
 
 function findSmallest (arr) {
   let smallest = arr[0];
   let smallestIndex = 0;
+  
   for (let i = 1; i < arr.length; i++) {
     if (arr[i] < smallest) {
       smallest = arr[i];
       smallestIndex = i;
     }
   }  
+
   return smallestIndex;
 }
