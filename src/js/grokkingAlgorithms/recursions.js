@@ -4,6 +4,9 @@ const gcd = (a, b) => a == 0 ? b : b == 0 ? a : gcd(b, a % b);
 
 const sumOfArr = arr => arr.length == 0 ? 0 : arr.shift() + sumOfArr(arr);
 
+const arrLength = arr => arr[0] ? arr.shift() * 0 + 1 + arrLength(arr) : 1;
+
 console.log(factorial(5));
 console.log(gcd(140, 12));
 console.log(sumOfArr([10,10,10,10,10]));
+console.log(arrLength([1,2,3,4,5]));
