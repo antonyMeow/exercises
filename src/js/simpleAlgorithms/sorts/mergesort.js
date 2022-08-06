@@ -3,7 +3,7 @@ const array = [2,5436,12,7,8,54,3,235,134,565,4323,4564,324,421,24,44,0,0,0,0];
 const result = mergeSort(array);
 console.log(result);
 
-function mergeSort(arr){
+function mergeSort(arr) {
   if(arr.length < 2) return arr;
 
   const mid = Math.floor(arr.length / 2);
@@ -24,7 +24,7 @@ function sorting(leftArr, rightArr) {
   let j=0;
   
   while(i < n && j < m) {
-    if(leftArr[i] < rightArr[j]){
+    if(leftArr[i] < rightArr[j]) {
       result.push(leftArr[i]);
       i++;
     } 
@@ -39,7 +39,7 @@ function sorting(leftArr, rightArr) {
     i++;
   }
   
-  while(j < m){
+  while(j < m) {
     result.push(rightArr[j]);
     j++;
   }    
