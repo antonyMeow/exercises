@@ -82,16 +82,14 @@ class LinkedList
 
   getSize () { return this.#size; }
 
-  toString () 
+  toArray () 
   {
-    let current = this.#head;
-    let str = "" + current.getElement();
-    while (current.hasNext()) {
-      str += ", " + current.getNext().getElement();
-      current = current.getNext();
-    }
-    return str;
+    const arr = [];
+    for (let i = 0; i < this.#size; i++) arr[i] = this.getElement(i);
+    return arr;
   }
+
+  toString () { return this.toArray().join(", "); }
 
   #getNode (index) 
   {
