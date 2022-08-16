@@ -20,108 +20,65 @@ class LinkedList
   #head = null;
 
   constructor (...elements) {
-    if (!elements) return;
-    this.#head = new Node(elements[0]);
-    if (elements.length == 1) return;
-    for (let i = 1; i < elements.length; i++) {
-      const node = new Node (elements[i]);
-      let current = this.#head;
-      while (current.hasNext()) 
-        current = current.getNext();
-      current.setNext(node);
-      this.#size++;
-    }
+    if (elements) 
+      for (let i in elements) this.add(elements[i]);
+    this.#size = elements.length;
   }
 
   add (elem) 
   {
     const node = new Node(elem);
     if (!this.#head) this.#head = node;
-    else {
-      let current = this.#head;
-      while (current.hasNext()) 
-        current = current.getNext();
-      current.setNext(node);
-    }
+    else this.getLast().setNext(node);
     this.#size++;
   }
 
   insert (elem, index) 
   {
-    if (index == undefined || index < 0 || index > this.#size) throw new Error("wrong index");
-    const node = new Node(elem);
+    const node = new Node (elem);
     if (index == 0) {
       const temp = this.#head;
       this.#head = node;
       node.setNext(temp);
-      this.#size--;
-      return;
     }
-    let previous = this.#head;
-    let current = previous.getNext();
-    let i = 0;
-    while (i < index - 1) {
-      previous = current;
-      current = current.getNext();
-      i++;
+    else {
+      const previous = this.#getNode(index - 1);
+      const current = previous.getNext();
+      previous.setNext(node);
+      node.setNext(current);
     }
-    previous.setNext(node);
-    node.setNext(current);
     this.#size++;
   }
 
   removeIndex (index) 
   {
-    if (index == undefined || index < 0 || index > this.#size) throw new Error("wrong index");
-    if (index == 0) {
-      this.#head = this.#head.getNext();
-      this.#size--;
-      return;
+    if (index == 0) this.#head = this.#head.getNext();
+    else {
+      const previous = this.#getNode(index - 1);
+      const current = previous.getNext();
+      if (current.hasNext()) previous.setNext(current.getNext())
+      else previous.setNext(null);
     }
-    let previous = this.#head;
-    let current = previous.getNext();
-    let i = 0; 
-    while (i < index - 1) {
-      previous = current;
-      current = current.getNext();
-      i++;
-    }
-    if (current.hasNext()) previous.setNext(current.getNext())
-    else previous.setNext(null);
     this.#size--;
   }
 
   removeElement (elem) 
   {
-    let previous = this.#head;
-    let current = previous.getNext();
-    if (previous.getElement() == elem) {
-      this.#head = this.#head.getNext();
-      this.#size--;
-      return;
-    }
-    for (let i = 0; i < this.#size; i++) {
-      if (current.getElement() == elem) {
-        previous.setNext(current.getNext());
-        this.#size--;
-        return;
-      }
-      previous = current;
-      current = current.getNext();
-    }
+    const index = this.getIndex(elem);
+    this.removeIndex(index);
   }
 
-  getElement (index) 
+  getIndex (elem) 
   {
-    if (index == undefined || index < 0 || index > this.#size) throw new Error("wrong index");
-    let current = this.#head;
-    let i = 0;
-    while (i < index) {
-      current = current.getNext();
-      i++
-    }
-    return current.getElement();
+    for (let i = 0, current = this.#head; i < this.#size; i++, current = current.getNext()) 
+      if (current.getElement() == elem) return i;
   }
+
+  getElement (index) { return this.#getNode(index).getElement(); }
+
+  getFirst () { return this.#getNode(0); }
+
+  getLast () { return this.#getNode(this.#size); }
 
   getSize () { return this.#size; }
 
@@ -135,17 +92,18 @@ class LinkedList
     }
     return str;
   }
+
+  #getNode (index) 
+  {
+    this.#checkIndex(index);
+    if (!this.#head) return null;
+    let current = this.#head;
+    let i = 0;
+    while (++i < index) current = current.getNext();
+    return current;
+  }
+
+  #checkIndex (index) {
+    if (index == undefined || index < 0 || index > this.#size) throw new Error("wrong index");
+  }
 }
-
-//test
-
-const ll = new LinkedList ("I", "love", "pizza");
-ll.add("Meow");
-ll.add("Hello world!");
-ll.insert("insertion", 1);
-ll.insert("something", 2);
-ll.removeIndex(2);
-ll.removeElement("insertion");
-console.log(ll.getSize());
-console.log(ll.getElement(4));
-console.log(ll.toString());
