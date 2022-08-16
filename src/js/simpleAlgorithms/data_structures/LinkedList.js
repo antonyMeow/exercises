@@ -35,6 +35,7 @@ class LinkedList
 
   insert (elem, index) 
   {
+    this.#checkIndex(index);
     const node = new Node (elem);
     if (index == 0) {
       const temp = this.#head;
@@ -52,6 +53,7 @@ class LinkedList
 
   removeIndex (index) 
   {
+    this.#checkIndex(index);
     if (index == 0) this.#head = this.#head.getNext();
     else {
       const previous = this.#getNode(index - 1);
