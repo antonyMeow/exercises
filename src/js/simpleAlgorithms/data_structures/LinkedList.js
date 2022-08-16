@@ -9,7 +9,6 @@ class Node
   }
 
   setNext (next) { this.#next = next; }
-  hasNext () { return !!this.#next; }
   getNext () { return this.#next; }
   getElement () { return this.#elem; }
 }
@@ -58,7 +57,7 @@ class LinkedList
     else {
       const previous = this.#getNode(index - 1);
       const current = previous.getNext();
-      if (current.hasNext()) previous.setNext(current.getNext())
+      if (current.getNext()) previous.setNext(current.getNext())
       else previous.setNext(null);
     }
     this.#size--;
