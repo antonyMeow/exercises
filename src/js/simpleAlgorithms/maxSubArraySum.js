@@ -15,7 +15,7 @@ function maxSubArraySum (arr, l, h) {
   const a = maxSubArraySum(arr, l, m - 1);
   const b = maxSubArraySum(arr, m + 1, h);
   const c = maxCrossingSum(arr, l, m, h);
-  // console.log( {max: maxOfThree(a, b, c), arr: arr, l: l, m: m , h: h} );
+          
   return maxOfThree(a, b, c);
 }
 
