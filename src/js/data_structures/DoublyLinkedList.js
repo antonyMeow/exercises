@@ -1,5 +1,5 @@
 // have not finished yet (or at all)
-// (i won't work now)
+// (it won't work now)
 
 class ListNode 
 {
