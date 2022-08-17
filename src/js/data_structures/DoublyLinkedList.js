@@ -1,7 +1,7 @@
 // have not finished yet (or at all)
 // (i won't work now)
 
-class Node 
+class ListNode 
 {
   #elem;
   #next;
@@ -15,7 +15,7 @@ class Node
   setPrevious (node) { this.#prev = this.#typeCheck(node); }
   hasNext () { return !!this.#next; }
   hasPrevious () { return !!this.#prev; }
-  #typeCheck (elem) { return elem instanceof Node ? elem : new Node(elem); }
+  #typeCheck (elem) { return elem instanceof ListNode ? elem : new ListNode(elem); }
 }
 
 class DoublyLinkedList
@@ -32,7 +32,7 @@ class DoublyLinkedList
     add (elem, index) 
     {
       if (this.#size == 0) {
-        const node = new Node (elem);
+        const node = new ListNode (elem);
         this.#head = node;
         this.#tail = node;
         this.#increaseSize();
@@ -51,7 +51,7 @@ class DoublyLinkedList
 
     append (elem) 
     {
-      const node = new Node(elem);
+      const node = new ListNode(elem);
       const temp = this.#temp;
       node.setPrevious(temp);
       node.getPrevious().setNext(node);
@@ -61,7 +61,7 @@ class DoublyLinkedList
 
     prepend (elem) 
     {
-      const node = new Node(elem);
+      const node = new ListNode(elem);
       const temp = this.#head;
       node.setNext(temp);
       node.getNext().setPrevious(node);
