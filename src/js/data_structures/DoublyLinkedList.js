@@ -110,7 +110,3 @@ class DoublyLinkedList
 
     #decreaseSize () { this.#size--; }
 }
-
-const dll = new DoublyLinkedList ();
-dll.append("meow");
-dll.prepend("Hello");
